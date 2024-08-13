@@ -1,0 +1,140 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fd;
+    height: 100vh;
+}
+.formWrapper {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    width: 900px;
+}
+.formWrapper > div {
+    flex: 1;
+}
+.authSection {
+    padding: 3rem;
+    font-family: sans-serif !important;
+    border-left: 5px solid #00a9a2;
+}
+.authImg {
+    width: 50%;
+}
+.inputWrapper .label{
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #000;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+.inputWrapper {
+    margin-bottom: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input {
+    height: 48px;
+    background: #fff;
+    color: #000;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    transition: border-color 0.15s ease-in-out;
+    outline: none;
+    box-sizing: border-box;
+}
+.input:active, .input:focus, .input:focus-visible {
+    border: 1px solid #00a9a2;
+}
+.title {
+    margin-bottom: 3.8rem;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    color: #00a9a2;
+    font-weight: bold;
+}
+.button {
+    width: 100%;
+    color: white !important;
+    background-color: #00a9a2 !important;
+    font-size: 15px !important;
+    padding: 10px 20px !important;
+    margin-bottom: 1rem !important;
+}
+.button:hover {
+    background-color: #039690 !important;
+}
+.authSectionTwo {
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+.authSectionTwo a {
+    text-decoration: none;
+    color: gray;
+}
+.isMember {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: gray;
+}
+.isMember a {
+    text-decoration: none;
+    color: #00a9a2;
+    margin-left: 5px;
+}
+.errorMessage {
+    height: 30px;
+    color: #ff0000d4;
+    font-size: 14px;
+}
+.errorMessageEmpty {
+    height: 30px;
+}
+
+@media screen and (max-width: 700px) {
+    .formWrapper {
+        flex-direction: column;
+        width: 70%;
+    }
+    .authImg {
+        width: 100%;
+        height: 50vh;
+    }
+    .wrapper{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .authImg {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .formWrapper {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .formWrapper {
+        width: 100%;
+    }
+}
