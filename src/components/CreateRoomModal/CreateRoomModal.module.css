@@ -1,0 +1,101 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    background-color: white;
+    box-shadow: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modalHeader {
+    font-size: 30px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dbe1eb;
+}
+.closeIcon {
+    color: #6d7176;
+    font-size: 25px;
+    cursor: pointer;
+}
+.modalBody {
+    background-color: #00a9a2;
+    display: flex;
+    justify-content: center;
+}
+.modalContent {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    width: 50%;
+    justify-content: space-evenly;
+    padding: 15px;
+    margin: 10px 0;
+}
+.inputBox {
+    gap: 15px;
+    padding: 20px;
+    display: flex;
+    margin: 13px 0;
+}
+.input {
+    width: 60% !important;
+}
+.button {
+    background-color: #00a9a2 !important;
+    width: 60%;
+    height: 45px;
+    margin-left: 20px !important;
+    margin-top: 20px !important;
+}
+.errorMessage {
+    height: 30px;
+    color: #ff0000d4;
+    font-size: 14px;
+}
+.errorMessageEmpty {
+    height: 30px;
+}
+
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+    .modal {
+        width: 80%;
+    }
+    .modalContent {
+        width: 70%;
+    }
+}
+@media screen and (max-width: 800px) {
+    .modalContent {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 700px) {
+    .modal, .modalContent {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .modal {
+      width: 100%;
+      height: 100%;
+    }
+    .modalBody {
+        height: 65%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .modal {
+      overflow: auto;
+    }
+  }

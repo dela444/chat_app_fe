@@ -6,9 +6,7 @@ import * as Yup from 'yup'
 
 import styles from './Authentication.module.css'
 import { UserContext } from '../../UserContext'
-
-const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+import { BACKEND_URL, FRONTEND_URL } from '../../constants/appDefaults'
 
 const Authentication = ({ isLogin }) => {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -42,8 +40,6 @@ const Authentication = ({ isLogin }) => {
             window.location.href = FRONTEND_URL + '/chat'
           }
         }
-
-        actions.resetForm()
       } catch (error) {
         console.error('There was a problem with the request:', error)
       } finally {
@@ -64,8 +60,11 @@ const Authentication = ({ isLogin }) => {
           </Box>
           <Box className='form-wrapper'>
             <Box className={styles.inputWrapper}>
-              <label className='label'>USERNAME</label>
+              <label className='label' htmlFor='username'>
+                USERNAME
+              </label>
               <input
+                id='username'
                 name='username'
                 type='text'
                 className={styles.input}
@@ -81,8 +80,11 @@ const Authentication = ({ isLogin }) => {
               )}
             </Box>
             <Box className={styles.inputWrapper}>
-              <label className='label'>PASSWORD</label>
+              <label className='label' htmlFor='password'>
+                PASSWORD
+              </label>
               <input
+                id='password'
                 name='password'
                 type='password'
                 className={styles.input}

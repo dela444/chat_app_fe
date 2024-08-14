@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+import { BACKEND_URL } from './constants/appDefaults'
 
 export const UserContext = createContext()
 

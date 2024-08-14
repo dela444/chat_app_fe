@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router'
 
 import { UserContext } from '../../UserContext'
 
-const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL
-
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(UserContext)
   const navigate = useNavigate()
