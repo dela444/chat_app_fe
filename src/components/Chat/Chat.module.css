@@ -19,6 +19,7 @@
     background-color: cadetblue;
     margin: 5px auto 0 0;
     float: left;
+    border-top-left-radius: 0 !important;
 }
 .messageTo {
     padding: 13px 14px;
@@ -26,6 +27,7 @@
     float: right;
     background-color: #eceff1;
     margin: 1rem 0 0 auto;
+    border-bottom-right-radius: 0 !important;
 }
 .messageFromWrapper {
     margin-top: 10px;

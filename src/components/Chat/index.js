@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 
-import mySocket from '../../socket'
+import socket from '../../socket'
 import { UserContext } from '../../UserContext'
 import Sidebar from '../Sidebar'
 import styles from './Chat.module.css'
@@ -14,7 +14,6 @@ import { BACKEND_URL, FRONTEND_URL } from '../../constants/appDefaults'
 const Chat = () => {
   const { setUser, user } = useContext(UserContext)
   const [selectedChat, setSelectedChat] = useState(null)
-  const [socket, setSocket] = useState(() => mySocket(user))
   const [users, setUsers] = useState([])
   const [chatRooms, setChatRooms] = useState([])
   const [messages, setMessages] = useState([])
@@ -62,11 +61,14 @@ const Chat = () => {
   })
 
   useEffect(() => {
-    setSocket(() => mySocket(user))
-  }, [user])
+    socket.connect()
+
+    return () => {
+      socket.disconnect()
+    }
+  }, [])
 
   useEffect(() => {
-    socket.connect()
     socket.on('users', (usersList) => {
       setUsers(usersList)
     })
@@ -82,10 +84,12 @@ const Chat = () => {
       }
     })
     socket.on('messages', (data) => {
-      setMessages(data.reverse())
+      let reversedMessages = [...data].reverse()
+      setMessages(reversedMessages)
     })
     socket.on('roomMessages', (data) => {
-      setRoomMessages(data.reverse())
+      let reversedMessages = [...data].reverse()
+      setRoomMessages(reversedMessages)
     })
     socket.on('connect_error', () => {
       setUser({ authenticated: false })
@@ -108,7 +112,7 @@ const Chat = () => {
       socket.off('messages')
       socket.off('connected')
     }
-  }, [setUser, socket, setUsers])
+  }, [setUser, setUsers])
 
   useEffect(() => {
     const myUser = users.find((item) => item.username === user.username)
