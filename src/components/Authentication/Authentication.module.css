@@ -98,14 +98,6 @@
     color: #00a9a2;
     margin-left: 5px;
 }
-.errorMessage {
-    height: 30px;
-    color: #ff0000d4;
-    font-size: 14px;
-}
-.errorMessageEmpty {
-    height: 30px;
-}
 
 @media screen and (max-width: 700px) {
     .formWrapper {
@@ -120,19 +112,16 @@
         height: auto;
     }
 }
-
 @media screen and (max-width: 800px) {
     .authImg {
         width: 45%;
     }
 }
-
 @media screen and (max-width: 500px) {
     .formWrapper {
         width: 85%;
     }
 }
-
 @media screen and (max-width: 400px) {
     .formWrapper {
         width: 100%;

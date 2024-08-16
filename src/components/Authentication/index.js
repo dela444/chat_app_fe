@@ -5,6 +5,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import styles from './Authentication.module.css'
+import createRoomCSS from '../CreateRoomModal/CreateRoomModal.module.css'
 import { UserContext } from '../../UserContext'
 import { BACKEND_URL, FRONTEND_URL } from '../../constants/appDefaults'
 
@@ -72,11 +73,11 @@ const Authentication = ({ isLogin }) => {
                 {...formik.getFieldProps('username')}
               />
               {formik.errors.username && formik.touched.username ? (
-                <Box className={styles.errorMessage}>
+                <Box className={createRoomCSS.errorMessage}>
                   {formik.errors.username}
                 </Box>
               ) : (
-                <Box className={styles.errorMessageEmpty}></Box>
+                <Box className={createRoomCSS.errorMessageEmpty}></Box>
               )}
             </Box>
             <Box className={styles.inputWrapper}>
@@ -92,15 +93,15 @@ const Authentication = ({ isLogin }) => {
                 {...formik.getFieldProps('password')}
               />
               {formik.errors.password && formik.touched.password ? (
-                <Box className={styles.errorMessage}>
+                <Box className={createRoomCSS.errorMessage}>
                   {formik.errors.password}
                 </Box>
               ) : (
-                <Box className={styles.errorMessageEmpty}></Box>
+                <Box className={createRoomCSS.errorMessageEmpty}></Box>
               )}
               {errorMessage !== '' && (
                 <Box
-                  className={styles.errorMessage}
+                  className={createRoomCSS.errorMessage}
                   sx={{ textAlign: 'center' }}
                 >
                   {errorMessage}

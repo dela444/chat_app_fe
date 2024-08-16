@@ -11,10 +11,11 @@
     width: 65%;
     display: flex;
     flex-direction: column;
+    padding: 0 15px;
 }
 .messageFrom {
     padding: 13px 14px;
-    border-radius: 5px;
+    border-radius: 15px;
     color: white;
     background-color: cadetblue;
     margin: 5px auto 0 0;
@@ -23,7 +24,7 @@
 }
 .messageTo {
     padding: 13px 14px;
-    border-radius: 5px;
+    border-radius: 15px;
     float: right;
     background-color: #eceff1;
     margin: 1rem 0 0 auto;
@@ -40,11 +41,10 @@
     width: 65%;
     display: flex;
     flex-direction: row;
-    height: 20vh;
+    height: calc(20vh - 30px);
     align-items: center;
     justify-content: center;
 }
-
 .textarea {
     width: 100%;
     padding: 15px;
@@ -70,4 +70,9 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+}
+.timeWrapper {
+    color: #999999;
+    font-size: 13px;
+    text-align: end;
 }

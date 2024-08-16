@@ -62,11 +62,6 @@
     height: 30px;
 }
 
-
-
-
-
-
 @media screen and (max-width: 1000px) {
     .modal {
         width: 80%;
@@ -98,4 +93,4 @@
     .modal {
       overflow: auto;
     }
-  }
+}
