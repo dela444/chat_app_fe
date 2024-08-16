@@ -342,7 +342,22 @@ const Chat = () => {
           </Box>
         </Box>
       ) : (
-        <Box>Join in some chat</Box>
+        <Box className={styles.landingContent}>
+          <Box className={styles.landingTitle}>
+            <span className={styles.emphasize}>Welcome</span> to Your Chat Hub!
+          </Box>
+          <Box className={styles.landingSubtitle}>
+            <span className={styles.emphasize}>Start</span> a conversation by{' '}
+            <span className={styles.emphasize}>selecting</span> a chat room or a
+            user from the sidebar.
+          </Box>
+
+          <img
+            src='/images/landing-img.jpg'
+            alt=''
+            className={styles.landingImg}
+          />
+        </Box>
       )}
     </Box>
   )

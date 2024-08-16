@@ -50,7 +50,7 @@ const Authentication = ({ isLogin }) => {
   })
 
   //<a href="https://www.freepik.com/free-vector/messages-concept-illustration_5911277.htm#fromView=search&page=1&position=7&uuid=d2401977-c279-4b64-b0de-dace887d7fde">Image by storyset on Freepik</a>
-
+  //<a href="https://www.freepik.com/free-vector/work-chat-concept-illustration_7118068.htm#fromView=search&page=5&position=25&uuid=dce04d00-9def-4048-84cd-4fd8905ef141">Image by storyset on Freepik</a>
   return (
     <Box className={styles.wrapper}>
       <Box className={styles.formWrapper}>
