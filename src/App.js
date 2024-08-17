@@ -5,12 +5,17 @@ import Authentication from './components/Authentication'
 import Chat from './components/Chat'
 import { UserProvider } from './UserContext'
 import ProtectedRoute from './components/ProtectedRoute'
+import ErrorPage from './components/ErrorPage'
 
 function App() {
   return (
     <BrowserRouter>
       <UserProvider>
         <Routes>
+          <Route
+            path={'/'}
+            element={<Authentication isLogin={true} />}
+          ></Route>
           <Route
             path={'/login'}
             element={<Authentication isLogin={true} />}
@@ -27,7 +32,8 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
-          <Route path={'*'} element={<Authentication isLogin={true} />}></Route>
+          <Route path={'/error-page'} element={<ErrorPage />}></Route>
+          <Route path={'*'} element={<ErrorPage />}></Route>
         </Routes>
       </UserProvider>
     </BrowserRouter>

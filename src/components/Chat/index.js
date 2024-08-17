@@ -4,6 +4,8 @@ import SendIcon from '@mui/icons-material/Send'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
+import CheckIcon from '@mui/icons-material/Check'
+import DoneAllIcon from '@mui/icons-material/DoneAll'
 
 import socket from '../../socket'
 import { UserContext } from '../../UserContext'
@@ -60,12 +62,16 @@ const Chat = () => {
             }
 
             socket.emit('sendMessage', message)
-          } else {
+          } else if (response.data.message) {
             setErrorMessage(response.data.message)
           }
         }
       } catch (error) {
-        console.error('There was a problem with the request:', error)
+        if (error.response.data.status === 'fail') {
+          setErrorMessage(error.response.data.message)
+        } else if (error.response.data.status === 'error') {
+          window.location.href = FRONTEND_URL + '/error-page?status=500'
+        }
       } finally {
         actions.resetForm()
       }
@@ -260,25 +266,44 @@ const Chat = () => {
         <Box className={styles.content}>
           <Box className={styles.chatWrapper}>
             {selectedChat?.roomid
-              ? roomMessages.map((item, index) => (
-                  <Box key={index} className={styles.messageFromWrapper}>
-                    <Box className={styles.username}>
-                      {item.from !== user?.userid
-                        ? users.find((i) => i.userid === item.from)?.username
-                        : null}
+              ? roomMessages
+                  .filter((msg) => msg.recipient_id === selectedChat.roomid)
+                  .map((item, index) => (
+                    <Box key={index} className={styles.messageFromWrapper}>
+                      <Box className={styles.username}>
+                        {item.from !== user?.userid
+                          ? users.find((i) => i.userid === item.from)?.username
+                          : null}
+                      </Box>
+                      <Box
+                        className={
+                          item.from === user?.userid
+                            ? styles.messageTo
+                            : styles.messageFrom
+                        }
+                      >
+                        {item.content}
+                        <Box
+                          className={
+                            item.from !== user?.userid
+                              ? styles.timeWrapperFrom
+                              : styles.timeWrapperTo
+                          }
+                        >
+                          {item.creation_time}
+                          {item.from === user?.userid ? (
+                            item.status === 'sent' ? (
+                              <CheckIcon className={styles.sentIcon} />
+                            ) : item.status === 'delivered' ? (
+                              <DoneAllIcon className={styles.sentIcon} />
+                            ) : item.status === 'seen' ? (
+                              <DoneAllIcon className={styles.seenIcon} />
+                            ) : null
+                          ) : null}
+                        </Box>
+                      </Box>
                     </Box>
-                    <Box
-                      className={
-                        item.from === user?.userid
-                          ? styles.messageTo
-                          : styles.messageFrom
-                      }
-                    >
-                      {item.content}
-                    </Box>
-                    {item.from === user?.userid && <>status: {item.status}</>}
-                  </Box>
-                ))
+                  ))
               : messages
                   .filter(
                     (msg) =>
@@ -303,11 +328,25 @@ const Chat = () => {
                         }
                       >
                         {item.content}
-                        <Box className={styles.timeWrapper}>
+                        <Box
+                          className={
+                            item.from !== user?.userid
+                              ? styles.timeWrapperFrom
+                              : styles.timeWrapperTo
+                          }
+                        >
                           {item.creation_time}
+                          {item.from === user?.userid ? (
+                            item.status === 'sent' ? (
+                              <CheckIcon className={styles.sentIcon} />
+                            ) : item.status === 'delivered' ? (
+                              <DoneAllIcon className={styles.sentIcon} />
+                            ) : item.status === 'seen' ? (
+                              <DoneAllIcon className={styles.seenIcon} />
+                            ) : null
+                          ) : null}
                         </Box>
                       </Box>
-                      {item.from === user?.userid && <>status: {item.status}</>}
                     </Box>
                   ))}
           </Box>

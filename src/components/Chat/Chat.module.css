@@ -71,10 +71,19 @@
     align-items: center;
     padding: 10px;
 }
-.timeWrapper {
+.timeWrapperTo {
     color: #999999;
-    font-size: 13px;
-    text-align: end;
+    font-size: 12px;
+    justify-content: end;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+.timeWrapperFrom {
+    color: #efefef;
+    font-size: 12px;
+    text-align: start;
 }
 .landingContent {
     display: flex;
@@ -85,7 +94,10 @@
     height: 100vh;
 }
 .landingImg {
-    width: 45%;
+    max-width: 100%;
+    max-height: 75%;
+    height: auto;
+    width: auto;
 }
 .landingSubtitle {
     text-align: center;
@@ -102,5 +114,12 @@
     color:#333333
 }
 .emphasize {
+    color: #00a9a2;
+}
+.sentIcon {
+    width: 20px !important;
+}
+.seenIcon {
+    width: 20px !important;
     color: #00a9a2;
 }

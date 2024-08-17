@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     if (!user || !user.authenticated) {
-      navigate('/login')
+      navigate(`/error-page?status=401`)
     } else if (user.authenticated) {
       navigate('/chat')
     }

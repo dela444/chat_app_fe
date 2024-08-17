@@ -23,15 +23,17 @@ const CreateRoomModal = (props) => {
         const data = { ...values }
         const response = await axios.post(BACKEND_URL + '/create-room', data)
         if (response.data && Object.keys(response.data).length > 0) {
-          if (response.data.message) {
-            setErrorMessage(response.data.message)
-          } else if (response.data.success) {
+          if (response.data.success) {
             props.onClose()
             window.location.reload()
+          } else if (response.data.message) {
+            setErrorMessage(response.data.message)
           }
         }
       } catch (error) {
-        console.error('There was a problem with the request:', error)
+        if (error.response.data.status === 'fail') {
+          setErrorMessage(error.response.data.message)
+        }
       } finally {
         actions.resetForm()
       }

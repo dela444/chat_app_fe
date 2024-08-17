@@ -21,7 +21,7 @@ const Authentication = ({ isLogin }) => {
         .min(5, 'Username is too short!')
         .max(35, 'Username is too long!'),
       password: Yup.string()
-        .required('Password is a required field!')
+        .required('Password must be at least 8 characters long')
         .min(8, 'Password is too short!')
         .max(35, 'Password is too long!'),
     }),
@@ -33,16 +33,20 @@ const Authentication = ({ isLogin }) => {
           : BACKEND_URL + '/auth/register'
         const response = await axios.post(endpoint, data)
         if (response.data && Object.keys(response.data).length > 0) {
-          setUser({ ...response.data })
-          if (response.data.message) {
-            setErrorMessage(response.data.message)
-          } else if (response.data.authenticated) {
+          if (response.data.success) {
+            setUser({ ...response.data })
             localStorage.setItem('token', response.data.token)
             window.location.href = FRONTEND_URL + '/chat'
+          } else if (response.data.status === 'fail') {
+            setErrorMessage(response.data.message)
           }
         }
       } catch (error) {
-        console.error('There was a problem with the request:', error)
+        if (error.response.data.status === 'fail') {
+          setErrorMessage(error.response.data.message)
+        } else if(error.response.data.status === 'error') {
+          window.location.href = FRONTEND_URL + '/error-page?status=500'
+        }
       } finally {
         actions.resetForm()
       }
@@ -51,7 +55,10 @@ const Authentication = ({ isLogin }) => {
 
   //<a href="https://www.freepik.com/free-vector/messages-concept-illustration_5911277.htm#fromView=search&page=1&position=7&uuid=d2401977-c279-4b64-b0de-dace887d7fde">Image by storyset on Freepik</a>
   //<a href="https://www.freepik.com/free-vector/work-chat-concept-illustration_7118068.htm#fromView=search&page=5&position=25&uuid=dce04d00-9def-4048-84cd-4fd8905ef141">Image by storyset on Freepik</a>
-  return (
+ //<a href="https://www.freepik.com/free-vector/500-internal-server-error-concept-illustration_7906229.htm#fromView=author&page=3&position=21&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a>
+ //<a href="https://www.freepik.com/free-vector/page-found-with-people-connecting-plug-concept-illustration_7906228.htm#fromView=author&page=1&position=39&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a> 
+ //<a href="https://www.freepik.com/free-vector/401-error-unauthorized-concept-illustration_7906232.htm#fromView=author&page=2&position=42&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a>
+ return (
     <Box className={styles.wrapper}>
       <Box className={styles.formWrapper}>
         <img src='/images/auth-img.jpg' alt='' className={styles.authImg} />
