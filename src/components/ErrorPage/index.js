@@ -26,7 +26,7 @@ const ErrorPage = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search)
-    const status = Number(queryParams.get('status'))  || 404
+    const status = Number(queryParams.get('status')) || 404
 
     if (status) {
       const err = errors.find((item) => item.status === status)

@@ -16,6 +16,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #dbe1eb;
+    box-shadow: inset 5px 4px 20px 1px rgb(0 0 0 / 18%);
 }
 .closeIcon {
     color: #6d7176;
@@ -32,7 +33,7 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
-    width: 50%;
+    width: 60%;
     justify-content: space-evenly;
     padding: 15px;
     margin: 10px 0;
@@ -88,9 +89,18 @@
     .modalBody {
         height: 65%;
     }
+    .modalHeader {
+        font-size: 23px;
+    }
 }
 @media screen and (max-width: 500px) {
     .modal {
       overflow: auto;
+    }
+    .input {
+        width: 80% !important;
+    }
+    .button {
+        width: 80%;
     }
 }

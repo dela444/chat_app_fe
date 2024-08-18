@@ -1,5 +1,11 @@
+.sidebarContent {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 .accountIcon {
-    color: gray;
+    color: #8e8e8e;
     cursor: pointer;
     font-size: 43px !important;
 }
@@ -13,7 +19,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 0.5rem 0.6rem;
+    padding: 0;
     margin: 0.1rem 1rem;
     border-radius: 0.4rem;
     cursor: pointer;
@@ -38,7 +44,7 @@
 }
 .appBar{
     background-color: white !important;
-    color: #ff6663 !important;
+    color: #00a9a2 !important;
 }
 .accountIconWrapper {
     padding: 24px 32px 8px;
@@ -68,4 +74,9 @@
 .list {
     overflow: auto;
     height: 27.5%;
+}
+@media screen and (max-height: 750px) {
+    .list {
+        height: 22%
+    }
 }

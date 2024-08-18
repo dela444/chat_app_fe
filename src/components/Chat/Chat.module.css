@@ -1,14 +1,21 @@
-.content {
+.contentWrapper {
     display: flex;
     height: 100%;
     width: 100%;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; 
+}
+.content {
+    display: flex;
+    height: 100%;
+    width: 65%;
+    align-items: center;
+    flex-direction: column; 
 }
 .chatWrapper {
     height: 80vh;
     overflow: auto;
-    width: 65%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 0 15px;
@@ -38,7 +45,7 @@
     font-size: 12px;
 }
 .textInputWrapper {
-    width: 65%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     height: calc(20vh - 30px);
@@ -122,4 +129,50 @@
 .seenIcon {
     width: 20px !important;
     color: #00a9a2;
+}
+.errorMessage {
+    text-align: center;
+    width: 100%;
+}
+@media screen and (max-width: 1200px) {
+    .content {
+        width: 71%;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .content {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 800px) {
+    .landingSubtitle  {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .landingContent {
+        height: calc(100vh - 30px);
+        margin-top: 30px;
+    }
+    .chatWrapper {
+        margin-top: 40px;
+    }
+    .content {
+        height: calc(100vh - 40px);
+    }
+}
+@media screen and (max-width: 400px) {
+    .landingTitle  {
+        font-size: 22px;
+    }
+    .landingSubtitle {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+}
+@media screen and (max-height: 700px){
+    .landingContent {
+        height: calc(100vh - 60px);
+        margin-top: 60px;
+    }
 }

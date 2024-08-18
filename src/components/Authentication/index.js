@@ -44,7 +44,7 @@ const Authentication = ({ isLogin }) => {
       } catch (error) {
         if (error.response.data.status === 'fail') {
           setErrorMessage(error.response.data.message)
-        } else if(error.response.data.status === 'error') {
+        } else if (error.response.data.status === 'error') {
           window.location.href = FRONTEND_URL + '/error-page?status=500'
         }
       } finally {
@@ -55,10 +55,10 @@ const Authentication = ({ isLogin }) => {
 
   //<a href="https://www.freepik.com/free-vector/messages-concept-illustration_5911277.htm#fromView=search&page=1&position=7&uuid=d2401977-c279-4b64-b0de-dace887d7fde">Image by storyset on Freepik</a>
   //<a href="https://www.freepik.com/free-vector/work-chat-concept-illustration_7118068.htm#fromView=search&page=5&position=25&uuid=dce04d00-9def-4048-84cd-4fd8905ef141">Image by storyset on Freepik</a>
- //<a href="https://www.freepik.com/free-vector/500-internal-server-error-concept-illustration_7906229.htm#fromView=author&page=3&position=21&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a>
- //<a href="https://www.freepik.com/free-vector/page-found-with-people-connecting-plug-concept-illustration_7906228.htm#fromView=author&page=1&position=39&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a> 
- //<a href="https://www.freepik.com/free-vector/401-error-unauthorized-concept-illustration_7906232.htm#fromView=author&page=2&position=42&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a>
- return (
+  //<a href="https://www.freepik.com/free-vector/500-internal-server-error-concept-illustration_7906229.htm#fromView=author&page=3&position=21&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a>
+  //<a href="https://www.freepik.com/free-vector/page-found-with-people-connecting-plug-concept-illustration_7906228.htm#fromView=author&page=1&position=39&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a>
+  //<a href="https://www.freepik.com/free-vector/401-error-unauthorized-concept-illustration_7906232.htm#fromView=author&page=2&position=42&uuid=8dbe71af-ea3d-4c62-ad8f-c6adb5016c76">Image by storyset on Freepik</a>
+  return (
     <Box className={styles.wrapper}>
       <Box className={styles.formWrapper}>
         <img src='/images/auth-img.jpg' alt='' className={styles.authImg} />
@@ -99,12 +99,10 @@ const Authentication = ({ isLogin }) => {
                 placeholder='Enter password'
                 {...formik.getFieldProps('password')}
               />
-              {formik.errors.password && formik.touched.password ? (
+              {formik.errors.password && formik.touched.password && (
                 <Box className={createRoomCSS.errorMessage}>
                   {formik.errors.password}
                 </Box>
-              ) : (
-                <Box className={createRoomCSS.errorMessageEmpty}></Box>
               )}
               {errorMessage !== '' && (
                 <Box

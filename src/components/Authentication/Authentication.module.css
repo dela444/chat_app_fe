@@ -98,32 +98,49 @@
     color: #00a9a2;
     margin-left: 5px;
 }
-
-@media screen and (max-width: 700px) {
-    .formWrapper {
-        flex-direction: column;
-        width: 70%;
-    }
-    .authImg {
-        width: 100%;
-        height: 50vh;
-    }
-    .wrapper{
-        height: auto;
-    }
-}
 @media screen and (max-width: 800px) {
     .authImg {
         width: 45%;
     }
 }
+@media screen and (max-width: 700px) {
+    .formWrapper {
+        flex-direction: column;
+        width: 68%;
+    }
+    .authImg {
+        display: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    .formWrapper {
+        width: 78%;
+    }
+}
 @media screen and (max-width: 500px) {
     .formWrapper {
-        width: 85%;
+        width: 90%;
     }
 }
 @media screen and (max-width: 400px) {
     .formWrapper {
         width: 100%;
+    }
+}
+@media screen and (max-height: 700px) {
+    .formWrapper {
+        height: 100%;
+    }
+    .title {
+        margin-top: 40px;
+    }
+}
+@media screen and (max-height: 500px) {
+    .title {
+       margin-bottom: 30px;
+       margin-top: 0;
+    }
+    .isMember {
+        margin-bottom: 0;
     }
 }

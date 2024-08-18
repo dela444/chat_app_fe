@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -22,6 +22,7 @@ const Chat = () => {
   const [chatRooms, setChatRooms] = useState([])
   const [messages, setMessages] = useState([])
   const [roomMessages, setRoomMessages] = useState([])
+  const endOfMessagesRef = useRef(null)
 
   const formik = useFormik({
     initialValues: { message: '' },
@@ -85,6 +86,10 @@ const Chat = () => {
       socket.disconnect()
     }
   }, [])
+
+  useEffect(() => {
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, roomMessages])
 
   useEffect(() => {
     socket.on('users', (usersList) => {
@@ -210,7 +215,7 @@ const Chat = () => {
       socket.off('seen')
       socket.off('connected')
     }
-  }, [setUser, setUsers, selectedChat, messages])
+  }, [setUser, setUsers, selectedChat, messages, roomMessages])
 
   useEffect(() => {
     const myUser = users.find((item) => item.username === user.username)
@@ -263,120 +268,124 @@ const Chat = () => {
       />
 
       {selectedChat ? (
-        <Box className={styles.content}>
-          <Box className={styles.chatWrapper}>
-            {selectedChat?.roomid
-              ? roomMessages
-                  .filter((msg) => msg.recipient_id === selectedChat.roomid)
-                  .map((item, index) => (
-                    <Box key={index} className={styles.messageFromWrapper}>
-                      <Box className={styles.username}>
-                        {item.from !== user?.userid
-                          ? users.find((i) => i.userid === item.from)?.username
-                          : null}
-                      </Box>
-                      <Box
-                        className={
-                          item.from === user?.userid
-                            ? styles.messageTo
-                            : styles.messageFrom
-                        }
-                      >
-                        {item.content}
+        <Box className={styles.contentWrapper}>
+          <Box className={styles.content}>
+            <Box className={styles.chatWrapper}>
+              {selectedChat?.roomid
+                ? roomMessages
+                    .filter((msg) => msg.recipient_id === selectedChat.roomid)
+                    .map((item, index) => (
+                      <Box key={index} className={styles.messageFromWrapper}>
+                        <Box className={styles.username}>
+                          {item.from !== user?.userid
+                            ? users.find((i) => i.userid === item.from)
+                                ?.username
+                            : null}
+                        </Box>
                         <Box
                           className={
-                            item.from !== user?.userid
-                              ? styles.timeWrapperFrom
-                              : styles.timeWrapperTo
+                            item.from === user?.userid
+                              ? styles.messageTo
+                              : styles.messageFrom
                           }
                         >
-                          {item.creation_time}
-                          {item.from === user?.userid ? (
-                            item.status === 'sent' ? (
-                              <CheckIcon className={styles.sentIcon} />
-                            ) : item.status === 'delivered' ? (
-                              <DoneAllIcon className={styles.sentIcon} />
-                            ) : item.status === 'seen' ? (
-                              <DoneAllIcon className={styles.seenIcon} />
-                            ) : null
-                          ) : null}
+                          {item.content}
+                          <Box
+                            className={
+                              item.from !== user?.userid
+                                ? styles.timeWrapperFrom
+                                : styles.timeWrapperTo
+                            }
+                          >
+                            {item.creation_time}
+                            {item.from === user?.userid ? (
+                              item.status === 'sent' ? (
+                                <CheckIcon className={styles.sentIcon} />
+                              ) : item.status === 'delivered' ? (
+                                <DoneAllIcon className={styles.sentIcon} />
+                              ) : item.status === 'seen' ? (
+                                <DoneAllIcon className={styles.seenIcon} />
+                              ) : null
+                            ) : null}
+                          </Box>
                         </Box>
                       </Box>
-                    </Box>
-                  ))
-              : messages
-                  .filter(
-                    (msg) =>
-                      msg.recipient_id === selectedChat.userid ||
-                      msg.from === selectedChat.userid
-                  )
-                  .map((item, index) => (
-                    <Box key={index} className={styles.messageFromWrapper}>
-                      <Box className={styles.username}>
-                        {item.from !== user?.userid
-                          ? users.find(
-                              (currentUser) => currentUser.userid === item.from
-                            )?.username
-                          : null}
-                      </Box>
+                    ))
+                : messages
+                    .filter(
+                      (msg) =>
+                        msg.recipient_id === selectedChat.userid ||
+                        msg.from === selectedChat.userid
+                    )
+                    .map((item, index) => (
+                      <Box key={index} className={styles.messageFromWrapper}>
+                        <Box className={styles.username}>
+                          {item.from !== user?.userid
+                            ? users.find(
+                                (currentUser) =>
+                                  currentUser.userid === item.from
+                              )?.username
+                            : null}
+                        </Box>
 
-                      <Box
-                        className={
-                          item.from === user?.userid
-                            ? styles.messageTo
-                            : styles.messageFrom
-                        }
-                      >
-                        {item.content}
                         <Box
                           className={
-                            item.from !== user?.userid
-                              ? styles.timeWrapperFrom
-                              : styles.timeWrapperTo
+                            item.from === user?.userid
+                              ? styles.messageTo
+                              : styles.messageFrom
                           }
                         >
-                          {item.creation_time}
-                          {item.from === user?.userid ? (
-                            item.status === 'sent' ? (
-                              <CheckIcon className={styles.sentIcon} />
-                            ) : item.status === 'delivered' ? (
-                              <DoneAllIcon className={styles.sentIcon} />
-                            ) : item.status === 'seen' ? (
-                              <DoneAllIcon className={styles.seenIcon} />
-                            ) : null
-                          ) : null}
+                          {item.content}
+                          <Box
+                            className={
+                              item.from !== user?.userid
+                                ? styles.timeWrapperFrom
+                                : styles.timeWrapperTo
+                            }
+                          >
+                            {item.creation_time}
+                            {item.from === user?.userid ? (
+                              item.status === 'sent' ? (
+                                <CheckIcon className={styles.sentIcon} />
+                              ) : item.status === 'delivered' ? (
+                                <DoneAllIcon className={styles.sentIcon} />
+                              ) : item.status === 'seen' ? (
+                                <DoneAllIcon className={styles.seenIcon} />
+                              ) : null
+                            ) : null}
+                          </Box>
                         </Box>
                       </Box>
-                    </Box>
-                  ))}
-          </Box>
-          {errorMessage !== '' ? (
-            <Box
-              className={createRoomCSS.errorMessage}
-              sx={{ textAlign: 'center', width: '65%' }}
-            >
-              {errorMessage}
+                    ))}
+              <Box ref={endOfMessagesRef} />
             </Box>
-          ) : (
-            <Box
-              className={createRoomCSS.errorMessageEmpty}
-              sx={{ textAlign: 'center', width: '65%' }}
-            ></Box>
-          )}
-          <Box className={styles.textInputWrapper}>
-            <textarea
-              className={styles.textarea}
-              placeholder='Type a message...'
-              name='message'
-              {...formik.getFieldProps('message')}
-            />
-
-            <Box className={styles.sendIconWrapper}>
-              <SendIcon
-                className={styles.sendIcon}
-                fontSize='large'
-                onClick={formik.handleSubmit}
+            {errorMessage !== '' ? (
+              <Box
+                className={createRoomCSS.errorMessage}
+                sx={{ textAlign: 'center', width: '65%' }}
+              >
+                {errorMessage}
+              </Box>
+            ) : (
+              <Box
+                className={`${createRoomCSS.errorMessageEmpty} ${styles.errorMessage}`}
+              ></Box>
+            )}
+            <Box className={styles.textInputWrapper}>
+              <textarea
+                className={styles.textarea}
+                placeholder='Type a message...'
+                name='message'
+                {...formik.getFieldProps('message')}
               />
+
+              <Box className={styles.sendIconWrapper}>
+                <SendIcon
+                  className={styles.sendIcon}
+                  fontSize='large'
+                  onClick={formik.handleSubmit}
+                />
+              </Box>
             </Box>
           </Box>
         </Box>

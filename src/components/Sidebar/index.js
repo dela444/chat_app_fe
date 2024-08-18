@@ -20,7 +20,7 @@ import AddIcon from '@mui/icons-material/Add'
 import MenuIcon from '@mui/icons-material/Menu'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import PersonIcon from '@mui/icons-material/Person'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import GroupIcon from '@mui/icons-material/Group'
 
 import styles from './Sidebar.module.css'
@@ -56,8 +56,12 @@ const Sidebar = ({
     }
   }
 
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [selectedChat])
+
   const drawer = (
-    <Box>
+    <Box className={styles.sidebarContent}>
       <Box className={styles.accountIconWrapper}>
         <PersonIcon className={styles.accountIcon} />
 
