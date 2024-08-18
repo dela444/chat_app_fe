@@ -9,6 +9,8 @@ import createRoomCSS from '../CreateRoomModal/CreateRoomModal.module.css'
 import { UserContext } from '../../UserContext'
 import { BACKEND_URL, FRONTEND_URL } from '../../constants/appDefaults'
 
+console.log(BACKEND_URL)
+
 const Authentication = ({ isLogin }) => {
   const [errorMessage, setErrorMessage] = useState(null)
   const { setUser } = useContext(UserContext)
