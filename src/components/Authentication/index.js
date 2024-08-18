@@ -10,6 +10,8 @@ import { UserContext } from '../../UserContext'
 import { BACKEND_URL, FRONTEND_URL } from '../../constants/appDefaults'
 
 console.log(BACKEND_URL)
+console.log(BACKEND_URL + '/auth/login')
+console.log(`${BACKEND_URL}/auth/login`)
 
 const Authentication = ({ isLogin }) => {
   const [errorMessage, setErrorMessage] = useState(null)
